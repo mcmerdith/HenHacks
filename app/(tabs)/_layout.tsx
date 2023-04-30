@@ -12,7 +12,7 @@ export default function TabLayout() {
         <Tabs
             screenOptions={{
                 headerRight: () => (
-                    <Link href="/modal" asChild>
+                    <Link href="/account" asChild>
                         <Pressable>
                             {({ pressed }) => (
                                 <FontAwesome

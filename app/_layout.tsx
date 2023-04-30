@@ -5,7 +5,7 @@ import {
     ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Navigator, SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
@@ -53,8 +53,8 @@ function RootLayoutNav() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name="modal"
-                        options={{ presentation: "modal" }}
+                        name="account"
+                        options={{ title: "Your Account" }}
                     />
                 </Stack>
             </ThemeProvider>
