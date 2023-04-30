@@ -7,16 +7,7 @@ import Colors from "../../constants/Colors";
 import { styles } from "../../constants/Style";
 import LivePreview from "./LivePreview";
 
-export function IDE(
-    props: RendererProps & {
-        reloadHtml?: boolean;
-        setReloadHtml: React.Dispatch<React.SetStateAction<boolean>>;
-        reloadCss?: boolean;
-        setReloadCss: React.Dispatch<React.SetStateAction<boolean>>;
-        reloadJs?: boolean;
-        setReloadJs: React.Dispatch<React.SetStateAction<boolean>>;
-    },
-) {
+export function IDE(props: RendererProps) {
     const [tempHtml, setTempHtml] = useState<string>(props.html);
     const [htmlContent, setHtmlContent] = useState<string>(props.html);
 
@@ -25,22 +16,6 @@ export function IDE(
 
     const [tempJs, setTempJs] = useState<string>(props.js);
     const [jsContent, setJsContent] = useState<string>(props.js);
-
-    // if (props.reloadHtml === true) {
-    //     props.setReloadHtml(false);
-    //     setTempHtml(props.html);
-    //     setHtmlContent(props.html);
-    // }
-    // if (props.reloadCss === true) {
-    //     props.setReloadCss(false);
-    //     setTempCss(props.css);
-    //     setCssContent(props.css);
-    // }
-    // if (props.reloadJs === true) {
-    //     props.setReloadJs(false);
-    //     setTempJs(props.js);
-    //     setJsContent(props.js);
-    // }
 
     const Tab = createBottomTabNavigator();
 

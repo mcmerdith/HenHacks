@@ -12,19 +12,18 @@ import { styles } from "../../constants/Style";
 import DropDownPicker from "react-native-dropdown-picker";
 
 export default function TabTwoScreen() {
-    return <></>;
-
     const [activities, setActivities] = useState<Activity[]>([]);
     const [activity, setActivity] = useState<string>("zero");
+    const [ideKey, setIdeKey] = useState<string>(Math.random().toString());
     const [step, setStep] = useState<number>(0);
 
     const [html, setHtml] = useState<string>("");
     const [css, setCss] = useState<string>("");
     const [js, setJs] = useState<string>("");
 
-    const [reloadHtml, setReloadHtml] = useState<boolean>(false);
-    const [reloadCss, setReloadCss] = useState<boolean>(false);
-    const [reloadJs, setReloadJs] = useState<boolean>(false);
+    const [htmlLoaded, setHtmlLoaded] = useState<boolean>(false);
+    const [cssLoaded, setCssLoaded] = useState<boolean>(false);
+    const [jsLoaded, setJsLoaded] = useState<boolean>(false);
 
     const [open, setOpen] = useState(false);
 
@@ -40,26 +39,35 @@ export default function TabTwoScreen() {
             .then((val) => {
                 console.log("Loaded html");
                 setHtml(val);
-                setReloadHtml(true);
             })
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => setHtmlLoaded(true));
         storage_ReadData(
             storage_GetFileReference(activity, step, "css", true, null),
         )
             .then((val) => {
                 setCss(val);
-                setReloadCss(true);
             })
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => setCssLoaded(true));
         storage_ReadData(
             storage_GetFileReference(activity, step, "js", true, null),
         )
             .then((val) => {
                 setJs(val);
-                setReloadJs(true);
             })
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => setJsLoaded(true));
     }, [activity, step]);
+
+    useEffect(() => {
+        if (htmlLoaded && cssLoaded && jsLoaded) {
+            setHtmlLoaded(false);
+            setCssLoaded(false);
+            setJsLoaded(false);
+            setIdeKey(Math.random().toString());
+        }
+    }, [htmlLoaded, cssLoaded, jsLoaded]);
 
     return (
         <ThemedView style={{ ...styles.fillWidth, ...styles.fillHeight }}>
@@ -83,17 +91,7 @@ export default function TabTwoScreen() {
                 <Button title="Previous" />
                 <Button title="Next" />
             </ThemedView>
-            <IDE
-                html={html}
-                css={css}
-                js={js}
-                reloadHtml={reloadHtml}
-                setReloadHtml={setReloadHtml}
-                reloadCss={reloadCss}
-                setReloadCss={setReloadCss}
-                reloadJs={reloadJs}
-                setReloadJs={setReloadJs}
-            />
+            <IDE html={html} css={css} js={js} key={ideKey} />
         </ThemedView>
     );
 }
