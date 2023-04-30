@@ -20,5 +20,5 @@ export const styles = StyleSheet.create({
     },
     fillWidth: {
         width: "100%",
-    }
+    },
 });

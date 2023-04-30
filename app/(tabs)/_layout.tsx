@@ -35,12 +35,12 @@ export default function TabLayout() {
         >
             <Tabs.Screen name="index" options={{ title: "Code Editor" }} />
             <Tabs.Screen name="two" options={{ title: "Chat GPT" }} />
-      <Tabs.Screen
-        name="three"
-        options={{
-          title: 'Chat GPT Assistant',
-        }}
-      />
+            <Tabs.Screen
+                name="three"
+                options={{
+                    title: "Chat GPT Assistant",
+                }}
+            />
         </Tabs>
     );
 }

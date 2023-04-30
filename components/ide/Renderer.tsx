@@ -4,9 +4,9 @@
  */
 
 import WebView from "react-native-webview";
-import { ThemedText, ThemedView } from "../../components/Themed";
-import { Button, Platform } from "react-native";
-import { Component, useEffect, useState } from "react";
+import { ThemedView } from "../../components/Themed";
+import { Platform } from "react-native";
+import { Component } from "react";
 import React from "react";
 import { styles } from "../../constants/Style";
 

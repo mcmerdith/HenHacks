@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, SafeAreaView, View, useColorScheme } from "react-native";
+import { Button, SafeAreaView, useColorScheme } from "react-native";
 import { Editor } from "./Editor";
-import { Renderer, RendererProps } from "./Renderer";
+import { RendererProps } from "./Renderer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Colors from "../../constants/Colors";
 import { styles } from "../../constants/Style";
@@ -57,9 +57,9 @@ export function IDE(props: RendererProps) {
                     tabBarIcon: () => <></>,
                 }}
             >
-                <Tab.Screen name="HTML" children={htmlEditor} />
-                <Tab.Screen name="CSS" children={cssEditor} />
-                <Tab.Screen name="JavaScript" children={jsEditor} />
+                <Tab.Screen name="HTML">{htmlEditor}</Tab.Screen>
+                <Tab.Screen name="CSS">{cssEditor}</Tab.Screen>
+                <Tab.Screen name="JavaScript">{jsEditor}</Tab.Screen>
             </Tab.Navigator>
 
             <Button

@@ -3,6 +3,8 @@ import { Platform, StyleSheet } from "react-native";
 
 import { ThemedText, ThemedView } from "../components/Themed";
 
+import React from "react";
+
 export default function ModalScreen() {
     return (
         <ThemedView style={styles.container}>
