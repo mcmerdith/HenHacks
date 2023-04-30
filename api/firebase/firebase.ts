@@ -6,7 +6,6 @@ import {
     createUserWithEmailAndPassword,
     signOut,
     signInWithEmailAndPassword,
-    GoogleAuthProvider,
     Auth,
     User,
     onAuthStateChanged,
@@ -31,14 +30,12 @@ const firebaseConfig = {
 export let app: FirebaseApp;
 export let analytics: Analytics;
 export let auth: Auth;
-let googleProvider: GoogleAuthProvider;
 let user: User | null;
 
 export function firebaseInit() {
     app = initializeApp(firebaseConfig);
     analytics = getAnalytics(app);
     auth = getAuth(app);
-    googleProvider = new GoogleAuthProvider();
     onAuthStateChanged(auth, (newuser) => {
         user = newuser;
     });
