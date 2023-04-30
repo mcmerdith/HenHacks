@@ -12,7 +12,7 @@ export default function ChatGPTScreen() {
         <ThemedView style={styles.container}>
             <TextInput onChangeText={setInput} value={input} />
             <Button
-                title=""
+                title="GO TIME"
                 onPress={() => {
                     makeRequest(input).then(console.log);
                 }}
