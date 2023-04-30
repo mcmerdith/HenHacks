@@ -162,3 +162,22 @@ export function storage_ReadData(ref: StorageReference): Promise<string> {
             .catch(reject),
     );
 }
+
+/**
+ * Make this data drive later
+ */
+
+export interface Activity {
+    name: string;
+    numSteps: number;
+}
+
+export function database_GetActivities(): Promise<Activity[]> {
+    return new Promise((resolve) =>
+        resolve([
+            { name: "zero", numSteps: 1 },
+            { name: "one", numSteps: 1 },
+            { name: "two", numSteps: 1 },
+        ]),
+    );
+}

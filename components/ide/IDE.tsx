@@ -7,13 +7,40 @@ import Colors from "../../constants/Colors";
 import { styles } from "../../constants/Style";
 import LivePreview from "./LivePreview";
 
-export function IDE(props: RendererProps) {
+export function IDE(
+    props: RendererProps & {
+        reloadHtml?: boolean;
+        setReloadHtml: React.Dispatch<React.SetStateAction<boolean>>;
+        reloadCss?: boolean;
+        setReloadCss: React.Dispatch<React.SetStateAction<boolean>>;
+        reloadJs?: boolean;
+        setReloadJs: React.Dispatch<React.SetStateAction<boolean>>;
+    },
+) {
     const [tempHtml, setTempHtml] = useState<string>(props.html);
     const [htmlContent, setHtmlContent] = useState<string>(props.html);
+
     const [tempCss, setTempCss] = useState<string>(props.css);
     const [cssContent, setCssContent] = useState<string>(props.css);
+
     const [tempJs, setTempJs] = useState<string>(props.js);
     const [jsContent, setJsContent] = useState<string>(props.js);
+
+    // if (props.reloadHtml === true) {
+    //     props.setReloadHtml(false);
+    //     setTempHtml(props.html);
+    //     setHtmlContent(props.html);
+    // }
+    // if (props.reloadCss === true) {
+    //     props.setReloadCss(false);
+    //     setTempCss(props.css);
+    //     setCssContent(props.css);
+    // }
+    // if (props.reloadJs === true) {
+    //     props.setReloadJs(false);
+    //     setTempJs(props.js);
+    //     setJsContent(props.js);
+    // }
 
     const Tab = createBottomTabNavigator();
 
@@ -26,7 +53,6 @@ export function IDE(props: RendererProps) {
     );
 
     const cssEditor = () => {
-        console.log("rebuilding css");
         return (
             <Editor
                 language="css"
@@ -47,7 +73,7 @@ export function IDE(props: RendererProps) {
     const colorScheme = useColorScheme();
 
     return (
-        <SafeAreaView style={styles.fillHeight}>
+        <>
             <LivePreview html={htmlContent} css={cssContent} js={jsContent} />
 
             <Tab.Navigator
@@ -70,6 +96,6 @@ export function IDE(props: RendererProps) {
                     setJsContent(tempJs);
                 }}
             />
-        </SafeAreaView>
+        </>
     );
 }
