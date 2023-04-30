@@ -82,8 +82,11 @@ export class Editor extends Component<EditorProps> {
     }
 
     getContent(): string {
-        return this.renderer
-            ?.getRenderWindow()
-            .contentWindow?.getEditorContent();
+        return (
+            this.renderer
+                ?.getRenderWindow()
+                // @ts-ignore this function is defined, but typescript doesn't know it
+                .contentWindow?.getEditorContent()
+        );
     }
 }
