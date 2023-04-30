@@ -4,7 +4,6 @@ import { ThemedText, ThemedView } from "../../components/Themed";
 import { styles } from "../../constants/Style";
 import React, { useState } from "react";
 import { makeRequest } from "../../api/chatGPT";
-import { Text } from "react-native";
 
 export default function ChatGPTScreen() {
     const [input, setInput] = useState<string>("");

@@ -29,15 +29,17 @@ export default function TabLayout() {
                     </Link>
                 ),
                 headerTitle: "MonkeySee",
-                headerStyle: {backgroundColor: Colors[colorScheme ?? "light"].background},
+                headerStyle: {
+                    backgroundColor: Colors[colorScheme ?? "light"].background,
+                },
                 tabBarIcon: () => <></>,
                 tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
             }}
         >
             <Tabs.Screen name="index" options={{ title: "Code Editor" }} />
-            <Tabs.Screen name="two" options={{ title: "Chat GPT" }} />
+            <Tabs.Screen name="lessons" options={{ title: "Lessons" }} />
             <Tabs.Screen
-                name="three"
+                name="chatgpt"
                 options={{
                     title: "Chat GPT Assistant",
                 }}

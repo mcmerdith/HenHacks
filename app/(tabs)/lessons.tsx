@@ -1,6 +1,5 @@
 import { Button } from "react-native";
 import { ThemedView } from "../../components/Themed";
-import { Editor } from "../../components/ide/Editor";
 import React from "react";
 import {
     storage_GetFileReference,
