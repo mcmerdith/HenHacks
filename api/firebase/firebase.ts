@@ -28,6 +28,7 @@ import {
     UploadResult,
 } from "firebase/storage";
 import { UserProfile } from "./interface/userprofile";
+import axios from "axios";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -143,4 +144,21 @@ export function storage_WriteData(
     return uploadString(ref, data);
 }
 
-export function storage_ReadData(ref: StorageReference): Promise<string> {}
+export function storage_ReadData(ref: StorageReference): Promise<string> {
+    return new Promise((resolve, reject) =>
+        getDownloadURL(ref)
+            .then((url) =>
+                axios
+                    .get(url)
+                    .then((value) => {
+                        if (value.status !== 200) {
+                            reject(value.statusText);
+                        } else {
+                            resolve(value.data);
+                        }
+                    })
+                    .catch(reject),
+            )
+            .catch(reject),
+    );
+}

@@ -23,14 +23,15 @@ export default function ChatGPTScreen() {
                 value={input}
                 placeholder="Enter question here"
             />
-            <Button color="orange"
+            <Button
+                color="orange"
                 title="Generate"
                 onPress={() => {
                     handleRequest(input);
                 }}
             />
-            
-            <ThemedText style={styles.response}>{response}</ThemedText>{" "}
+
+            <ThemedText style={styles.response}>{response}</ThemedText>
             {/* Render the response from the API */}
         </ThemedView>
     );
