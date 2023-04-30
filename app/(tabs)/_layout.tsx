@@ -28,7 +28,8 @@ export default function TabLayout() {
                         </Pressable>
                     </Link>
                 ),
-                headerTitle: "Monkey",
+                headerTitle: "MonkeySee",
+                headerStyle: {backgroundColor: Colors[colorScheme ?? "light"].background},
                 tabBarIcon: () => <></>,
                 tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
             }}
