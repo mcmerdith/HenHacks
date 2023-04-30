@@ -60,9 +60,22 @@ export class Renderer extends Component<RendererProps> {
     render() {
         this.id = Math.random();
         return (
-            <ThemedView style={{ ...styles.fillWidth, ...styles.fillHeight }}>
+            <ThemedView
+                style={{
+                    ...styles.fillWidth,
+                    ...styles.fillHeight,
+                    borderBottomStartRadius: 4,
+                    borderBottomEndRadius: 4,
+                }}
+            >
                 {Platform.OS === "web" ? (
-                    <iframe id={"content-renderer-" + this.id}></iframe>
+                    <iframe
+                        id={"content-renderer-" + this.id}
+                        style={{
+                            borderBottomRightRadius: 4,
+                            borderBottomLeftRadius: 4,
+                        }}
+                    ></iframe>
                 ) : (
                     <WebView
                         originWhitelist={["*"]}
