@@ -4,6 +4,11 @@ import { Platform } from "react-native";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-html";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-css";
+import "ace-builds/src-noconflict/worker-html";
+import "ace-builds/src-noconflict/worker-javascript";
+import "ace-builds/src-noconflict/worker-css";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 
@@ -21,11 +26,6 @@ function getAceEditor(language: LanguageType, content: string): string {
         left: 0;
     }
 </style>
-<script>
-    function getEditorContent() {
-        alert('hi');
-    }
-</script>
 </head>
 <body>
 
@@ -46,7 +46,7 @@ function getAceEditor(language: LanguageType, content: string): string {
 </html>`;
 }
 
-type LanguageType = "html" | "css" | "js";
+type LanguageType = "html" | "css" | "javascript";
 
 type EditorProps = {
     language: LanguageType;
@@ -58,17 +58,17 @@ export class Editor extends Component<EditorProps> {
     renderer: Renderer | null = null;
 
     render(): JSX.Element {
-        console.log("updating editor");
         return Platform.OS === "web" ? (
             <AceEditor
-                mode="html"
+                mode={this.props.language}
                 theme="monokai"
                 defaultValue={this.props.content}
                 onChange={this.props.setContent}
-                name="html-editor"
+                name={this.props.language + "-editor"}
                 editorProps={{ $blockScrolling: true }}
-                setOptions={{
-                    width: "100vw",
+                style={{
+                    width: "100%",
+                    height: "150px",
                 }}
             />
         ) : (

@@ -9,7 +9,7 @@ import { Button, Platform } from "react-native";
 import { Component, useEffect, useState } from "react";
 import React from "react";
 
-type RendererProps = {
+export type RendererProps = {
     html: string;
     css: string;
     js: string;
@@ -36,7 +36,6 @@ export class Renderer extends Component<RendererProps> {
 
     webUpdate() {
         if (Platform.OS === "web") {
-            console.log("updating", this.id);
             const iframe = this.getRenderWindow();
             iframe.style.width = "100%";
             iframe.style.height = "100%";
@@ -59,7 +58,6 @@ export class Renderer extends Component<RendererProps> {
 
     render() {
         this.id = Math.random();
-        console.log("rendering", this.id);
         return (
             <View>
                 {Platform.OS === "web" ? (
