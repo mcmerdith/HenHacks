@@ -15,4 +15,10 @@ export const styles = StyleSheet.create({
         height: 1,
         width: "80%",
     },
+    fillHeight: {
+        height: "100%",
+    },
+    fillWidth: {
+        width: "100%",
+    }
 });

@@ -4,10 +4,11 @@
  */
 
 import WebView from "react-native-webview";
-import { Text, View } from "../../components/Themed";
+import { ThemedText, ThemedView } from "../../components/Themed";
 import { Button, Platform } from "react-native";
 import { Component, useEffect, useState } from "react";
 import React from "react";
+import { styles } from "../../constants/Style";
 
 export type RendererProps = {
     html: string;
@@ -59,7 +60,7 @@ export class Renderer extends Component<RendererProps> {
     render() {
         this.id = Math.random();
         return (
-            <View>
+            <ThemedView style={{ ...styles.fillWidth, ...styles.fillHeight }}>
                 {Platform.OS === "web" ? (
                     <iframe id={"content-renderer-" + this.id}></iframe>
                 ) : (
@@ -68,10 +69,13 @@ export class Renderer extends Component<RendererProps> {
                         source={{
                             html: buildWebpage(this.props),
                         }}
-                        containerStyle={{ width: "100%", height: "100%" }}
+                        style={{
+                            ...styles.fillWidth,
+                            ...styles.fillHeight,
+                        }}
                     />
                 )}
-            </View>
+            </ThemedView>
         );
     }
 
