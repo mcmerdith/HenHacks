@@ -13,7 +13,7 @@ export function IDE(props: RendererProps) {
     const [jsContent, setJsContent] = useState<string>(props.js);
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView>
             <Renderer html={htmlContent} css={cssContent} js={jsContent} />
             <Button
                 title="Run"
