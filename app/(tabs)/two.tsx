@@ -1,5 +1,6 @@
 import { ThemedView } from "../../components/Themed";
 import { Editor } from "../../components/ide/Editor";
+import { styles } from '../../constants/Style';
 
 export default function TabTwoScreen() {
     return (
