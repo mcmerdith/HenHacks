@@ -11,6 +11,23 @@ import {
     onAuthStateChanged,
     Unsubscribe,
 } from "firebase/auth";
+import {
+    getFirestore,
+    Firestore,
+    DocumentReference,
+    doc,
+    getDoc,
+} from "firebase/firestore";
+import {
+    getStorage,
+    FirebaseStorage,
+    StorageReference,
+    ref,
+    uploadString,
+    getDownloadURL,
+    UploadResult,
+} from "firebase/storage";
+import { UserProfile } from "./interface/userprofile";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,16 +47,19 @@ const firebaseConfig = {
 export let app: FirebaseApp;
 export let analytics: Analytics;
 export let auth: Auth;
+export let storage: FirebaseStorage;
+export let firestore: Firestore;
 let user: User | null;
 
 export function firebaseInit() {
     app = initializeApp(firebaseConfig);
     analytics = getAnalytics(app);
     auth = getAuth(app);
+    storage = getStorage(app);
+    firestore = getFirestore(app);
     onAuthStateChanged(auth, (newuser) => {
         user = newuser;
     });
-    console.log("initialized firebase");
 }
 
 export function auth_GetUser(): User | null {
@@ -67,3 +87,60 @@ export function auth_SignIn(email: string, password: string) {
 export function auth_SignOut() {
     return signOut(auth);
 }
+
+/*
+Database
+*/
+
+export function database_GetDocument<T>(
+    document: DocumentReference<T>,
+): Promise<T> {
+    return new Promise((resolve, reject) =>
+        getDoc(document)
+            .then((snapshot) => {
+                if (snapshot.exists()) resolve(snapshot.data());
+                else reject("Not Found");
+            })
+            .catch(reject),
+    );
+}
+
+export function database_GetUserDoc(
+    user: User,
+): DocumentReference<UserProfile> {
+    return doc(firestore, "users", user.uid) as DocumentReference<UserProfile>;
+}
+
+export function database_GetUser(user: User): Promise<UserProfile> {
+    return database_GetDocument(database_GetUserDoc(user));
+}
+
+/*
+Storage
+*/
+
+export type FileType = "html" | "css" | "js";
+
+export function storage_GetFileReference(
+    activity: string,
+    step: number,
+    type: FileType,
+    template: boolean,
+    user: User | null,
+) {
+    return ref(
+        storage,
+        `${
+            template ? "" : user?.uid + "/"
+        }${activity}/${step}/activity.${type}`,
+    );
+}
+
+export function storage_WriteData(
+    ref: StorageReference,
+    data: string,
+): Promise<UploadResult> {
+    return uploadString(ref, data);
+}
+
+export function storage_ReadData(ref: StorageReference): Promise<string> {}
